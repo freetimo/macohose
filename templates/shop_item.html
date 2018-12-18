@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %} | {{ product.title }}{% endblock %}
+{% block og_title %} | {{ product.title }}{% endblock %}
+{% block content %}
+<article>
+	<section>
+		{% include 'nav_b.html' %}
+	</section>
+	<section class="s_item_section">
+		<div class="s_item_l_section">
+			<img src="{{ product.thumbnail.url }}" class="s_item_img" alt="">
+		</div>
+		<div class="s_item_r_section">
+			<div>
+				<div class="s_item_r_title">{{ product.title }}</div>
+				<div class="s_item_r_description">{{ product.info }}</div>
+				<div class="s_item_r_price">￦{{ product.price }}</div>
+				<div class="s_item_r_description">{{ product.description }}</div>
+			</div>
+			<div class="input-field">
+				<input type="number" min="1" id="quantity" name="quantity" autocomplete="off" onkeypress="onlyNumber();">
+        <label for="quantity">수량</label>
+			</div>
+			<button class="waves-effect waves-light btn add_btn" id="add_btn" name="{{ product.id }}" type="submit">장바구니</button>
+		</div>
+	</section>
+	<section class="s_item_section">
+		<div class="s_item_more">
+			{% if product.content1 %}
+			<div class="s_item_m_container">
+				<img src="{{ product.content1.url }}" alt="" class="s_item_m_img">
+			</div>
+			{% endif %}
+			{% if product.content2 %}
+			<div class="s_item_m_container">
+				<img src="{{ product.content2.url }}" alt="" class="s_item_m_img">
+			</div>
+			{% endif %}
+			{% if product.content3 %}
+				<div class="s_item_m_container">
+					<img src="{{ product.content3.url }}" alt="" class="s_item_m_img">
+				</div>
+			{% endif %}
+		</div>
+	</section>
+</article>
+{% include 'footer.html' %}
+{% endblock %}
+{% block javascript %}
+<script>
+	$('#shop').addClass('b_nav')
+</script>
+<script>
+	function onlyNumber(){
+		if((event.keyCode<48)||(event.keyCode>57))
+			event.returnValue=false;
+	}
+</script>
+<script>
+  $('#add_btn').click(function(){
+    var pk = $(this).attr('name') 
+    var quantity = $("#quantity").val();
+    $.ajax({
+      type: "POST",
+      url: "{% url 'shopping-cart-add'%}?id={{product.id}}",
+      data: {
+        'pk': pk, 
+        'quantity': quantity,
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      dataType: "json",
+      success: function(response){
+	      $("#nav_count").html(response.total_count);
+        M.toast({html: response.message, classes:'toast', displayLength:2500})
+      },  
+      error: function(request, status, error){
+        M.toast({html: '에러가 발생했습니다.', classes:'toast', displayLength:2500})
+      },
+    });
+  })  
+</script>
+{% endblock %}

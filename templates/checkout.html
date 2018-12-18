@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %} | Checkout{% endblock %}
+{% block og_title %} | Checkout{% endblock %}
+{% block content %}
+<article>
+	<section>
+		<nav class="nav">
+			<div class="logo">
+				<a href="{% url 'home' %}">MACOHOSE</a>
+			</div>
+		</nav>
+	</section>
+	<section class="checkout_section">
+		<div class="check_l_section">
+			<div class="checkout_main_title">Customer Information</div>
+			<form method="post" autocomplete="off" class="shop_form" novalidate>
+			{% csrf_token %}
+				<div class="input-field ">
+					{% render_field form.name id='name' %}
+	        <label for="name">이름</label>
+		      {% for error in form.name.errors %}
+		      	<span class="helper-text red-text">이름을 작성해주시기 바랍니다.</span>
+		      {% endfor %}
+		    </div>
+				<div class="input-field ">
+					{% render_field form.email id='email' %}
+	        <label for="email">이메일</label>
+		      {% for error in form.email.errors %}
+		      	<span class="helper-text red-text">연락 가능한 이메일을 작성해주시기 바랍니다.</span>
+		      {% endfor %}
+		    </div>
+				<div class="input-field ">
+					{% render_field form.phone id='phone' %}
+	        <label for="phone">연락처</label>
+		      {% for error in form.phone.errors %}
+		      	<span class="helper-text red-text">연락처를 작성해주시기 바랍니다.</span>
+		      {% endfor %}
+		    </div>
+		    <div class="zip_form_part">
+					<div class="input-field ">
+						{% render_field form.zipcode class='zipcode' id='zipcode' placeholder='우편번호' name="zipcode" %}
+			      {% for error in form.zipcode.errors %}
+			      	<span class="helper-text red-text">우편번호를 작성해주시기 바랍니다.</span>
+			      {% endfor %}
+			    </div>
+					<button type="button" class="waves-effect waves-light btn hide-under" onclick="openZipSearch()">검색</button>
+					<button type="button" class="waves-effect waves-light btn hide-upper" onclick="m_openZipSearch()">검색</button>
+		   	</div>
+	   		<div id="wrap" style="display:none;border:1px solid;width:100%;height:300px;margin:5px 0;position:relative">
+				</div>
+				<div class="input-field ">
+					{% render_field form.address id='address' placeholder='주소' name="address" %}
+		      {% for error in form.address.errors %}
+		      	<span class="helper-text red-text">주소를 작성해주시기 바랍니다.</span>
+		      {% endfor %}
+		    </div>
+				<div class="input-field ">
+					{% render_field form.detail_address id='detail_address' placeholder='상세주소' name="detail_address"%}
+		      {% for error in form.detail_address.errors %}
+		      	<span class="helper-text red-text">상세주소를 작성해주시기 바랍니다.</span>
+		      {% endfor %}
+		    </div>
+				<div class="checkout_notice">NOTICE) 무통장 입금으로만 진행할 수 있습니다. 양해부탁드립니다. 상기 이름은 예금주명과 동일해야합니다.</div>
+				<button class="waves-effect waves-light btn submit_btn" type="submit" name="action">주문하기</button>
+			</form>
+		</div>
+		<div class="checkout_r_section">
+			<div class="checkout_bill_container">
+				<div class="checkout_main_title">Order Summary</div>
+				{% for item in cart.items %}
+				<div class="checkout_bill">
+					<div class="checkout_img_container">
+	     		 	<img src="{{ item.product.thumbnail.url }}" class="checkout_img" alt="">
+					</div>
+	      	<div class="checkout_bill_text">
+	      		<div>
+		      		<div class="bill_item_title">{{ item.product.title }}</div>
+		      		<div class="bill_item_title">{{ item.product.info }}</div>
+	      		</div>
+	      		<div>
+			  	    <div class="bill_item_subtotal">￦{{ item.subtotal }}</div>
+			   	    <div class="bill_item_quantity">수량 : {{ item.quantity }}</div>
+	      		</div>
+	      	</div>
+				</div>
+				{% endfor %}
+				<div class="">
+					<div class="checkout_bill_cost">
+						<div class="bill_deliver_cost">배송비</div>
+						<div class="bill_deliver_cost">￦{% if cart.count < 3%}2500{% else %}0{% endif %}</div>
+					</div>
+					<div class="checkout_bill_cost">
+						<div class="bill_total_cost">총액</div>
+						<div class="bill_total_cost">￦{{total_cost}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
+{% endblock %}
+{% block javascript %}
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<script>
+	function openZipSearch() {
+	new daum.Postcode({
+    oncomplete: function(data) {
+      var fullAddr = '';
+      var extraAddr = '';
+      if (data.userSelectedType === 'R') {
+        fullAddr = data.roadAddress;
+      } else {
+        fullAddr = data.jibunAddress;
+      }
+      if(data.userSelectedType === 'R'){
+        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+          extraAddr += data.bname;
+        }
+        if(data.buildingName !== '' && data.apartment === 'Y'){
+          extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+        }
+        fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+      }
+			$('[name=zipcode]').val(data.zonecode);
+			$('[name=address]').val(fullAddr);
+			$('[name=detail_address]').focus();
+    }
+	}).open();
+	}
+</script>
+<script>
+  var element_wrap = document.getElementById('wrap');
+  function foldDaumPostcode() {
+    element_wrap.style.display = 'none';
+  }
+  function m_openZipSearch() {
+    var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+    new daum.Postcode({
+      oncomplete: function(data) {
+        var fullAddr = data.address;
+        var extraAddr = '';
+        if(data.addressType === 'R'){
+          if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+            extraAddr += data.bname;
+          }
+          if(data.buildingName !== '' && data.apartment === 'Y'){
+            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+          }
+          fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+        }
+				$('[name=zipcode]').val(data.zonecode);
+				$('[name=address]').val(fullAddr);
+        element_wrap.style.display = 'none';
+        document.body.scrollTop = currentScroll;
+      },
+      onresize : function(size) {
+          element_wrap.style.height = size.height+'px';
+      },
+      width : '100%',
+      height : '100%'
+    }).embed(element_wrap);
+    element_wrap.style.display = 'block';
+  }
+</script>
+<script>
+  $('body').css({'padding':'0'});
+</script>
+{% endblock %}
+

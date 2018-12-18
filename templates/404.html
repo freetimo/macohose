@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<article>
+	<section>
+		{% include 'nav_b.html' %}
+	</section>
+	<section>
+	<div class="error_page_title">404</div>
+	<div class="error_page_description">찾으시려는 웹페이지는 존재하지 않는 페이지입니다.</div>
+	<div class="error_page_sub_description">입력하신 페이지 url주소가 정확한지 다시 한번 확인해주시기 바랍니다. <br><br> <a href="{% url 'home' %}">홈으로 돌아가기</a></div>
+	</section>
+</article>
+{% include 'footer.html' %}
+{% endblock %}
+{% block javascript %}
+<script>
+  $('body').css({'padding':'0'});
+</script>
+{% endblock %}

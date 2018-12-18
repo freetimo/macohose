@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %} | Contact{% endblock %}
+{% block og_title %} | Contact{% endblock %}
+{% block content %}
+<article>
+	<section>
+		{% include 'nav_b.html' %}
+		<div class="contact">
+			<div class="contact_title">
+				Contacts Us
+			</div>		
+		  <form class="contact_form" method="post" autocomplete="off" novalidate>
+		    {% csrf_token %}
+		    	<div class="contact_f_input">
+			      {% render_field form.title type="text" placeholder="제목을 입력하세요." %}
+			      {% render_field form.email type="text" placeholder="이메일을 입력하세요." %}
+		    	</div>
+		    	<div class="contact_s_input">
+		     	  {% render_field form.description type="text" placeholder="내용을 입력하세요." %}
+		    	</div>
+		    	<div class="contact_send_error">
+		    		{% if form.errors %}
+			      <span class="helper-text red-text">모든 항목과 이메일을 정확히 입력해주세요.</span>
+		    		{% endif %}
+		    		<button class="btn contact_send_btn" type="submit" >
+		    			send
+		    		</button>
+		    	</div>
+		     </div>
+		   </form>
+		</div>
+	</section>
+</article>
+{% include 'footer.html' %}
+{% endblock %}
+{% block javascript %}
+<script>
+  {% if messages %}
+    {% for message in messages %}
+      M.toast({html: '{{ message }}', classes:'toast_btn', displayLength:2500})
+    {% endfor %}
+  {% endif %}
+</script>
+<script>
+	$('#contact').addClass('b_nav')
+</script>
+{% endblock %}

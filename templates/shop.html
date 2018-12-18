@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %} | Shop{% endblock %}
+{% block og_title %} | Shop{% endblock %}
+{% block content %}
+<article>
+	<section>
+		{% include 'nav_b.html' %}
+		<div class="shop_title">Sun's up.<br>The Best Way To Start Your Day.</div>
+	</section>
+	<section class="shop_item_section">
+		<div class="shop_item_grid">
+			{% for product in products %}
+				<div class="shop_item">
+					<a href="{% url 'shop_item' product.slug %}">
+						<div class="shop_item_thumb"><img src="{{ product.thumbnail.url }}" alt="" class="shop_item_img"></div>
+						<div class="shop_item_title">{{ product.title }}</div>
+						<div class="shop_item_price">￦{{ product.price }}</div>
+						<div class="shop_item_info">{{ product.info }}</div>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+</article>
+{% include 'footer.html' %}
+{% endblock %}
+{% block javascript %}
+<script>
+	$('#shop').addClass('b_nav')
+</script>
+{% endblock %}
+
