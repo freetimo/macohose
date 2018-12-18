@@ -1137,6 +1137,10 @@ input[type=number]:not(.browser-default){
 	.order_info_item_container{
 		margin:  1rem 0;
 	}
+	.order_info_description{
+	 -webkit-text-fill-color: rgba(0, 0, 0, 1); 
+	 -webkit-opacity: 1; 
+	}
 	.order_back_home{
 		text-align: center;
 		font-size: 1.6rem;
