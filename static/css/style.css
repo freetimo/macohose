@@ -840,6 +840,7 @@ input[type=number]:not(.browser-default){
 	}
 	.index_main{
 		width: 90%;
+		height: 100%;
 		margin: 10rem auto 0;
 	}
 	.i_m_fir{
@@ -869,7 +870,7 @@ input[type=number]:not(.browser-default){
 	}
   .a_m_bg{
   	width: 90%;
-	 	outline: unset;
+	 	outline: none;
 	 	padding: 3rem 1.5rem 0 1.5rem;
 	 	height: 61rem;
 	}
