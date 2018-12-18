@@ -828,9 +828,6 @@ input[type=number]:not(.browser-default){
     background-color: black;
     padding-top: .8rem;
 	}
-	.sidenav li>.m_logo{
-		font-size: 2rem;
-	}
 	.sidenav>li>a {
     color: rgb(150, 150, 150);
 	 -webkit-text-fill-color: rgba(150, 150, 150, 1); 
@@ -839,6 +836,11 @@ input[type=number]:not(.browser-default){
     height: 5.5rem;
     line-height: 5.5rem;
 	}
+	.sidenav li>.m_logo{
+		font-size: 2rem;
+	 -webkit-text-fill-color: rgba(250, 250, 250, 1); 
+	 -webkit-opacity: 1; 
+	}
 	.sidenav_sns_div {
     bottom: 30rem;
     position: fixed;
@@ -846,9 +848,13 @@ input[type=number]:not(.browser-default){
 	.sidenav_sns_div>li>a {
     font-size: 1.6rem;
     color: rgb(150, 150, 150);
+	 -webkit-text-fill-color: rgba(150, 150, 150, 1); 
+	 -webkit-opacity: 1; 
 	}
 	.sidenav_sns {
     color: rgb(200, 200, 200);
+	 -webkit-text-fill-color: rgba(200, 200, 200, 1); 
+	 -webkit-opacity: 1; 
     font-size: 1.9rem;
     padding: 0 32px;
 	}
