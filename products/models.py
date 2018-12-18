@@ -1,6 +1,6 @@
 from django.db import models
 from imagekit.models import ProcessedImageField
-from imagekit.processors import ResizeToFill
+from imagekit.processors import Thumbnail
 
 
 class Product(models.Model):
@@ -12,7 +12,7 @@ class Product(models.Model):
 	thumbnail = ProcessedImageField(
 		upload_to='shop/thumbnail/', 
 		blank=True,
-		processors=[ResizeToFill(700, 700)],
+		processors=[Thumbnail(700, 700)],
 	)
 	content1 = ProcessedImageField(
 		upload_to='shop/thumbnail/', 
