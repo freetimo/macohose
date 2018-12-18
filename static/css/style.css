@@ -838,9 +838,11 @@ input[type=number]:not(.browser-default){
 	.nav_count{
 		margin-right: -3.3rem;
 	}
+	.index_bg{
+		height: 100vh;
+	}
 	.index_main{
 		width: 90%;
-		height: 100%;
 		margin: 10rem auto 0;
 	}
 	.i_m_fir{
