@@ -85,6 +85,12 @@ nav a{
  -webkit-text-fill-color: rgba(250, 250, 250, 1); 
  -webkit-opacity: 1; 
 }
+.nav_count_color{
+	background-color: transparent;
+	border: 1px solid white;
+ -webkit-text-fill-color: rgba(250, 250, 250, 1); 
+ -webkit-opacity: 1; 
+}
 .nav_count{
 	display: inline-block;
 	vertical-align: top;
