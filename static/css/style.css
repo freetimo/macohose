@@ -872,6 +872,9 @@ input[type=number]:not(.browser-default){
 	.about_bg_container{
 	 	height: 67rem;
 	}
+	.about_bg{
+	 	height: 67rem;
+	}
 	.about_main{
 		margin: 0;
 	}
