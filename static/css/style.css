@@ -795,7 +795,7 @@ input[type=number]:not(.browser-default){
 		width: 90%;
 	}
 	.logo{
-		flex: unset;
+		flex: none;
 	}
 	nav .sidenav-trigger{
 		margin: 0;
@@ -828,12 +828,11 @@ input[type=number]:not(.browser-default){
     padding: 0 32px;
 	}
 	.nav_right_container{
-		all: unset;
-		flex: 1;
+		margin-right: 0;
 	}
 	.nav_right{
 		justify-content: flex-end;
-		width: unset;
+		width: 100%;
 	}
 	.nav_count{
 		margin-right: -3.3rem;
@@ -904,16 +903,13 @@ input[type=number]:not(.browser-default){
   }
   .about_f,
   .about_s{
-  	outline: unset;
-  	left: unset;
+  	outline: none;
+  	left: 0;
   	width: 90%;
   	margin: 0 auto;
   }
-  .about_f{
-  	outline: unset;
-  }
   .about_s{
-  	top: unset;
+  	top: 0;
   }
 	.a_v_title{
 		font-size: 2rem;
@@ -1074,7 +1070,7 @@ input[type=number]:not(.browser-default){
 	}
 	.check_l_section {
     padding: 1.5rem;
-    flex: unset;
+    flex: 0;
     margin: 0 auto 2rem;
 	}
 	.zip_form_part>div>input[type=text]:not(.browser-default) {
@@ -1084,7 +1080,7 @@ input[type=number]:not(.browser-default){
     padding: 0 0.5rem;
 	}
 	.checkout_r_section{
-		flex: unset;
+		flex: 0;
 		margin: 0 0 5rem 0;
 	}
 	/*order*/
