@@ -841,8 +841,10 @@ input[type=number]:not(.browser-default){
 		height: 100vh;
 	}
 	.index_main{
+		position: relative;
+		top: 15%;
 		width: 90%;
-		margin: 10rem auto 0;
+		margin: 0 auto;
 	}
 	.i_m_fir{
 		font-size: 2.4rem;
