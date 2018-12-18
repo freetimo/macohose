@@ -82,6 +82,8 @@ nav a{
 }
 .nav_a_color{
 	color: white;
+ -webkit-text-fill-color: rgba(250, 250, 250, 1); 
+ -webkit-opacity: 1; 
 }
 .nav_count{
 	display: inline-block;
