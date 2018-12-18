@@ -873,7 +873,10 @@ input[type=number]:not(.browser-default){
 	 	height: 67rem;
 	}
 	.about_bg{
-	 	height: 67rem;
+	 	min-height: 100%;
+    @media (max-width: @iphone-screen) {
+      background-attachment: scroll;
+    }
 	}
 	.about_main{
 		margin: 0;
