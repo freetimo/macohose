@@ -3,6 +3,9 @@
 {% load static %}
 {% block title %} | {{ product.title }}{% endblock %}
 {% block og_title %} | {{ product.title }}{% endblock %}
+{% block og_img %}{{ product.thumbnail.url }}{% endblock %}
+{% block description %} | {{ product.description }}{% endblock %}
+{% block og_description %} | {{ product.description }}{% endblock %}
 {% block content %}
 <article>
 	<section>
