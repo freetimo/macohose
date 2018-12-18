@@ -103,6 +103,8 @@ nav a{
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: white;
+ -webkit-text-fill-color: rgba(250, 250, 250, 1); 
+ -webkit-opacity: 1; 
 	text-align: center;
 	line-height: 1rem; 
 	z-index: 2;
@@ -831,6 +833,8 @@ input[type=number]:not(.browser-default){
 	}
 	.sidenav>li>a {
     color: rgb(150, 150, 150);
+	 -webkit-text-fill-color: rgba(150, 150, 150, 1); 
+	 -webkit-opacity: 1; 
     font-size: 1.7rem;
     height: 5.5rem;
     line-height: 5.5rem;
