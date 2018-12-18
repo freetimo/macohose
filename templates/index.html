@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block content %}
 <article>
 	<section class="index">
 		<div class="index_bg">
-			{% include 'nav.html' %}
 			<div class="index_main">
 				<div class="i_m_fir">집에서 시작하는 나만의 홈 카페</div>
 				<div class="i_m_sec">우리는 복잡한 삶보다 단순한 삶이 더 좋다는 것을 믿습니다. 바리스타가 아니더라도 집에서 누구든지 쉽게 커피를 만들 수 있는 경험을 선사합니다.</div>
@@ -20,5 +18,9 @@
 {% block javascript %}
 <script>
   $('body').css({'padding':'0'});
+	$('.nav_center_item').removeClass('nav_center_item');
+	$('.nav_b_cart').removeClass('nav_b_cart');
+	$('.logo a, nav a').addClass('nav_a_color');
+	$('#nav_count').css({'background-color': 'transparent', 'border': '1px solid white'});
 </script>
 {% endblock %}

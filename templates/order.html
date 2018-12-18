@@ -2,13 +2,8 @@
 {% load carton_tags %}
 {% block title %} | Order History{% endblock %}
 {% block og_title %} | Order History{% endblock %}
-
 {% block content %}
-
 <article>
-	<section>
-		{% include 'nav_b.html' %}
-	</section>
 	<section>
 		{% if orders %}
 		<div class="order_title">Order History</div>
@@ -70,10 +65,11 @@
 			</div>
 			<div class="hide-upper order_back_home"><a href="{% url 'home' %}">홈으로 돌아가기</a></div>
 		{% else %}
-		<div class="error_page_title">404</div>
-		<div class="error_page_description">찾으시려는 웹페이지는 존재하지 않는 페이지입니다.</div>
-		<div class="error_page_sub_description">입력하신 페이지 url주소가 정확한지 다시 한번 확인해주시기 바랍니다. <br><br> <a href="{% url 'home' %}">홈으로 돌아가기</a></div>
-		
+		<section class="error_section">
+			<div class="error_page_title">404</div>
+			<div class="error_page_description">찾으시려는 웹페이지는 존재하지 않는 페이지입니다.</div>
+			<div class="error_page_sub_description">입력하신 페이지 url주소가 정확한지 다시 한번 확인해주시기 바랍니다. <br><br> <a href="{% url 'home' %}">홈으로 돌아가기</a></div>
+		</section>
 		{% endif %}
 	</section>
 </article>

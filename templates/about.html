@@ -7,7 +7,6 @@
 	<section class="about">
 		<div class="about_bg_container">
 			<div class="about_bg">
-				{% include 'nav.html' %}
 				<div class="about_main">
 					<div class="a_m_bg">
 						<div class="a_m_title">OUR STORY</div>
@@ -73,6 +72,10 @@
 {% endblock %}
 {% block javascript %}
 <script>
-	$('#about').addClass('w_nav')
+	$('#about').addClass('w_nav');
+	$('.nav_center_item').removeClass('nav_center_item');
+	$('.nav_b_cart').removeClass('nav_b_cart');
+	$('.logo a, nav a').addClass('nav_a_color');
+	$('#nav_count').css({'background-color': 'transparent', 'border': '1px solid white'});
 </script>
 {% endblock %}

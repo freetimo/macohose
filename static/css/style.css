@@ -52,6 +52,7 @@ nav a{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: transparent;
 }
 .logo{
 	font-size: 2rem;
@@ -78,6 +79,9 @@ nav a{
 .nav_center_item:hover,
 .nav_b_cart:hover{
 	color: rgba(0, 0, 0, 0.6);
+}
+.nav_a_color{
+	color: white;
 }
 .nav_count{
 	display: inline-block;
@@ -134,6 +138,7 @@ nav a{
 .index{
 	width: 100%;
 	height: 100vh;
+	margin-top: -6rem;
 }
 .index_bg{
 	width: 100%;
@@ -143,7 +148,9 @@ nav a{
 }
 .index_main{
 	width: 70%;
-	margin: 13rem auto 0;
+	margin: 0 auto;
+	position: relative;
+	top: 25%;
 }
 .i_m_fir{
 	color: white;
@@ -174,6 +181,7 @@ nav a{
 /*about*/
 .about{
 	width: 100%;
+	margin-top: -6rem;
 }
 .about_bg_container{
 	width: 100%;
@@ -188,7 +196,8 @@ nav a{
 .about_main{
 	display: flex;
 	justify-content: center;
-	margin: 10rem 0 0 30rem;
+	margin: 0 0 0 30rem;
+	padding-top: 16rem;
 }
 .a_m_bg{
   outline: 1.5rem solid white;
@@ -877,6 +886,7 @@ input[type=number]:not(.browser-default){
 	}
 	.about_main{
 		margin: 0;
+		padding-top: 6rem;
 	}
   .a_m_bg{
   	width: 90%;
@@ -1112,5 +1122,18 @@ input[type=number]:not(.browser-default){
 	.order_back_home{
 		text-align: center;
 		font-size: 1.6rem;
+	}
+	.error_section{
+		width: 90%;
+		margin: 0 auto;
+	}
+	.error_page_title{
+	  font-size: 7rem;
+	}
+	.error_page_description{
+	  font-size: 2.3rem;
+	}
+	.error_page_sub_description{
+	  font-size: 1.6rem;
 	}
 }

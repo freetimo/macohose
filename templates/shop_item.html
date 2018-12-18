@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
-{% load widget_tweaks %}
-{% load static %}
 {% block title %} | {{ product.title }}{% endblock %}
 {% block og_title %} | {{ product.title }}{% endblock %}
 {% block og_img %}{{ product.thumbnail.url }}{% endblock %}
@@ -8,9 +6,6 @@
 {% block og_description %} | {{ product.description }}{% endblock %}
 {% block content %}
 <article>
-	<section>
-		{% include 'nav_b.html' %}
-	</section>
 	<section class="s_item_section">
 		<div class="s_item_l_section">
 			<img src="{{ product.thumbnail.url }}" class="s_item_img" alt="">
