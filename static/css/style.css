@@ -842,8 +842,7 @@ input[type=number]:not(.browser-default){
 	 -webkit-opacity: 1; 
 	}
 	.sidenav_sns_div {
-    bottom: 30rem;
-    position: fixed;
+		margin-top: 5rem;
 	}
 	.sidenav_sns_div>li>a {
     font-size: 1.6rem;
