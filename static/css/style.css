@@ -322,6 +322,22 @@ nav a{
 .a_f_text{
 	text-align: center;
 }
+.shop_btn{
+	text-align: center;
+	margin: 7rem 0 0 0;
+}
+.shop_btn>.btn{
+	height: 4.5rem;
+	line-height: 4.5rem;
+	border: 1.5px solid white;
+	padding: 0 8rem;
+	box-shadow: none;
+	background-color: black;
+	font-size: 1.4rem;
+}
+.shop_btn>.btn:hover{
+	background-color: rgba(0, 0, 0, 0.8);
+}
 .footer{
   position: absolute;
   left: 0;
