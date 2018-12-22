@@ -3,9 +3,16 @@ from .models import Product
 
 
 def shop(request):
-	products = Product.objects.all()
+	coffee_list = []
+	extra_list = []
+	for product in Product.objects.all():
+		if product.category == 'COFFEE':
+			coffee_list.append(product)
+		if product.category == 'EXTRA':
+			extra_list.append(product)
 	ctx = {
-		'products': products,
+		'coffee_list': coffee_list,
+		'extra_list': extra_list,
 		}
 	return render (request, 'shop.html', ctx)
 

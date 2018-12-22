@@ -369,12 +369,25 @@ nav a{
 .shop_title{
 	font-size: 3rem;
 	text-align: center;
-	margin: 3rem auto 2rem auto;
+	margin: 3rem auto 5rem auto;
 }
 .shop_item_section{
 	max-width: 115rem;
 	width: 90%;
-	margin:5rem auto;
+	margin: 2rem auto 5rem auto;
+}
+.shop_main_title {
+	text-align: center;
+	font-weight: bold;
+	font-size: 2rem;
+	width: 30rem; 
+	border-bottom: 1px solid rgba(0, 0, 0 , 0.2); 
+	line-height: 0.1em;
+	margin: 6rem auto 4rem auto;
+} 
+.shop_main_title>span { 
+	background:#fff; 
+	padding:0 10px; 
 }
 .shop_item_grid{
   display: grid;

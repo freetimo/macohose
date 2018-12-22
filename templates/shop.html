@@ -3,20 +3,20 @@
 {% block og_title %} | Shop{% endblock %}
 {% block content %}
 <article>
-	<section>
-		<div class="shop_title">Sun's up.<br>The Best Way To Start Your Day.</div>
+	<div class="shop_title">Sun's up.<br>The Best Way To Start Your Day.</div>
+	<section class="shop_item_section">
+		<div class="shop_main_title"><span>COFFEE</span></div>
+		<div class="shop_item_grid">
+			{% for product in coffee_list %}
+				{% include 'product.html' %}
+			{% endfor %}
+		</div>
 	</section>
 	<section class="shop_item_section">
+		<div class="shop_main_title"><span>EXTRA</span></div>
 		<div class="shop_item_grid">
-			{% for product in products %}
-				<div class="shop_item">
-					<a href="{% url 'shop_item' product.slug %}">
-						<div class="shop_item_thumb"><img src="{{ product.thumbnail.url }}" alt="" class="shop_item_img"></div>
-						<div class="shop_item_title">{{ product.title }}</div>
-						<div class="shop_item_price">￦{{ product.price }}</div>
-						<div class="shop_item_info">{{ product.info }}</div>
-					</a>
-				</div>
+			{% for product in extra_list %}
+				{% include 'product.html' %}
 			{% endfor %}
 		</div>
 	</section>
