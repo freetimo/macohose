@@ -18,6 +18,7 @@ urlpatterns = [
   path('cart/', views.cart, name='cart'),
   path('checkout/', views.checkout, name="checkout"),
   path('contact/', c_views.contact, name="contact"),
+  path('discount/', views.discount, name="discount"),
   path('robots.txt/', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"), name="robots"),
   path('<str:email>/', views.email, name="email"),
 ]

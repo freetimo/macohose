@@ -95,17 +95,35 @@ def checkout(request):
 		if coffee_count < 3:
 			total_cost = cart.total + 2500
 			if request.method == 'POST':
-				form = PostForm(request.POST)
-				if form.is_valid():
-					checkout = form.save(commit=False)
-					checkout.total_product = order_list
-					checkout.total_price = total_cost
-					checkout.save()
-					cart.clear()
-					return redirect('email', email=checkout.email)
+				right_discount_code = request.POST.get("right_discount_code")
+				if right_discount_code == '0752':
+					discount = 1000
+					total_cost = cart.total + 2500 - discount
+					form = PostForm(request.POST)
+					if form.is_valid():
+						checkout = form.save(commit=False)
+						checkout.total_product = order_list
+						checkout.total_price = total_cost
+						checkout.save()
+						cart.clear()
+						return redirect('email', email=checkout.email)
+					else:
+						stop_btn = True
+						ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status, 'discount': discount, 'right_discount_code': right_discount_code, 'stop_btn': stop_btn,}
+						return render(request, 'checkout.html', ctx)
 				else:
-					ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status,}
-					return render(request, 'checkout.html', ctx)
+					total_cost = cart.total + 2500
+					form = PostForm(request.POST)
+					if form.is_valid():
+						checkout = form.save(commit=False)
+						checkout.total_product = order_list
+						checkout.total_price = total_cost
+						checkout.save()
+						cart.clear()
+						return redirect('email', email=checkout.email)
+					else:
+						ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status, }
+						return render(request, 'checkout.html', ctx)
 			else:
 				form = PostForm()
 				ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status,}
@@ -113,17 +131,34 @@ def checkout(request):
 		else:
 			total_cost = cart.total
 			if request.method == 'POST':
-				form = PostForm(request.POST)
-				if form.is_valid():
-					checkout = form.save(commit=False)
-					checkout.total_product = order_list
-					checkout.total_price = total_cost
-					checkout.save()
-					cart.clear()
-					return redirect('email', email=checkout.email)  
+				right_discount_code = request.POST.get("right_discount_code")
+				if right_discount_code == '0752':
+					discount = 1000
+					total_cost = cart.total - discount
+					form = PostForm(request.POST)
+					if form.is_valid():
+						checkout = form.save(commit=False)
+						checkout.total_product = order_list
+						checkout.total_price = total_cost
+						checkout.save()
+						cart.clear()
+						return redirect('email', email=checkout.email)  
+					else:
+						stop_btn = True
+						ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status, 'discount': discount, 'right_discount_code': right_discount_code, 'stop_btn': stop_btn,}
+						return render(request, 'checkout.html', ctx)
 				else:
-					ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status,}
-					return render(request, 'checkout.html', ctx)
+					form = PostForm(request.POST)
+					if form.is_valid():
+						checkout = form.save(commit=False)
+						checkout.total_product = order_list
+						checkout.total_price = total_cost
+						checkout.save()
+						cart.clear()
+						return redirect('email', email=checkout.email)  
+					else:
+						ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status,}
+						return render(request, 'checkout.html', ctx)
 			else:
 				form = PostForm()
 				ctx = {'form': form, 'cart': cart, 'total_cost': total_cost, 'status': status,}
@@ -135,6 +170,21 @@ def checkout(request):
 		form = PostForm()
 		ctx = {'form': form, 'cart': cart, 'total_cost': total_cost, 'message': message, 'status': status,}
 		return render(request, 'checkout.html', ctx)
+
+def discount(request):
+	total_cost = request.POST.get('total_cost')
+	discount_code = request.POST.get('discount_code')
+	discount = 1000
+	if discount_code == '0752':
+		discount_cost = int(total_cost) - discount
+		message = '할인이 적용되었습니다.'
+		ctx = {'message': message, 'discount_code': discount_code, 'discount': discount, 'discount_cost': discount_cost,}
+		return JsonResponse(ctx)
+	else:
+		message = '할인 코드가 맞지 않습니다.'
+		ctx = {'message': message,}
+		return JsonResponse(ctx)
+
 
 def email(request, email):
 	now = timezone.localtime()

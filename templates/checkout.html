@@ -61,6 +61,7 @@
 		      	<span class="helper-text red-text">상세주소를 작성해주시기 바랍니다.</span>
 		      {% endfor %}
 		    </div>
+		    <input type="hidden" name="right_discount_code" id="right_discount_code" value="{{right_discount_code}}">
 				<div class="checkout_notice">NOTICE) 무통장 입금으로만 진행할 수 있습니다. 양해부탁드립니다. 상기 이름은 예금주명과 동일해야합니다.</div>
 				{% if status %}
 				<button class="waves-effect waves-light btn submit_btn" type="submit" name="action">주문하기</button>
@@ -70,6 +71,16 @@
 			</form>
 		</div>
 		<div class="checkout_r_section">
+			<div class="checkout_discount_container">
+				<div class="checkout_main_title">discount code</div>
+				<div class="discount_input_container">
+					<div class="input-field">
+						<input type="text" autocomplete="off" id="discount_code" value="{{right_discount_code}}">
+		        <label for="discount_code">할인코드</label>
+					</div>
+					<button class="waves-effect waves-light btn discount_btn" id="discount_btn" type="submit" name="{{total_cost}}">적용하기</button>
+				</div>
+			</div>
 			<div class="checkout_bill_container">
 				<div class="checkout_main_title">Order Summary</div>
 				{% for item in cart.items %}
@@ -99,8 +110,12 @@
 						{% endif %}
 					</div>
 					<div class="checkout_bill_cost">
+						<div class="bill_discount_cost">할인액</div>
+						<div class="bill_discount_cost">- ￦<span id="bill_discount_cost">{% if discount %}{{discount}}{% else %}0{% endif %}</span></div>
+					</div>
+					<div class="checkout_bill_cost">
 						<div class="bill_total_cost">총액</div>
-						<div class="bill_total_cost">￦{{total_cost}}</div>
+						<div class="bill_total_cost">￦<span id="bill_total_cost">{{total_cost}}</span></div>
 					</div>
 				</div>
 			</div>
@@ -109,6 +124,9 @@
 </article>
 {% endblock %}
 {% block javascript %}
+<script>
+  $('body').css({'padding':'0'});
+</script>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
 	function openZipSearch() {
@@ -171,8 +189,32 @@
     element_wrap.style.display = 'block';
   }
 </script>
-<script>
-  $('body').css({'padding':'0'});
+{% if not stop_btn %}
+<script id="discount_script">
+  $('#discount_btn').click(function(){
+    var total_cost = $(this).attr('name') 
+    var discount_code = $("#discount_code").val();
+    $.ajax({
+      type: "POST",
+      url: "{% url 'discount'%}",
+      data: {
+      	'total_cost': total_cost,
+        'discount_code': discount_code,
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      dataType: "json",
+      success: function(response){
+        M.toast({html: response.message, classes:'toast', displayLength:2500});
+	      $("#right_discount_code").val(response.discount_code);
+	      $("#bill_discount_cost").html(response.discount);
+	      $("#bill_total_cost").html(response.discount_cost);
+      },  
+      error: function(request, status, error){
+        M.toast({html: response.message, classes:'toast', displayLength:2500})
+      },
+    });
+  })  
 </script>
+{% endif %}
 {% endblock %}
 

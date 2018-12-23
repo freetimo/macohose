@@ -501,11 +501,13 @@ nav a{
 	margin: 0 auto;
 }
 .add_btn:hover,
+.discount_btn:hover,
 .order_btn:hover,
 .submit_btn:hover{
 	background-color: black;
 }
 .add_btn:focus,
+.discount_btn:focus,
 .order_btn:focus,
 .submit_btn:focus{
 	background-color: black;
@@ -740,6 +742,7 @@ input[type=number]:not(.browser-default){
 	padding: 3rem;
 	flex: 1.5;
 	margin-right: 3rem;
+	height: 100%;
 }
 .checkout_notice{
 	font-size: 1.4rem;
@@ -751,14 +754,32 @@ input[type=number]:not(.browser-default){
 .checkout_r_section{
 	flex: 1;
 }
-.checkout_bill_container{
+.checkout_bill_container,
+.checkout_discount_container{
 	border: 1px solid rgba(200,200,200,.7);
 	padding: 2rem;
+}
+.checkout_discount_container{
+	margin-bottom: 3rem;
 }
 .checkout_main_title{
   font-size: 2rem;
 	color: rgba(29,29,29,.8);
 	margin-bottom: 2rem;
+}
+.discount_input_container{
+	display: flex;
+	justify-content: space-between;
+}
+.discount_btn{
+  height: 4.5rem;
+  line-height: 4.5rem;
+  border-radius: 0;
+  padding: 0 2rem;
+  box-shadow: none;
+  font-size: 1.4rem;
+  background-color: black;
+  color: white;
 }
 .checkout_bill{
 	display: flex;
@@ -781,7 +802,8 @@ input[type=number]:not(.browser-default){
 .bill_item_title,
 .bill_item_subtotal,
 .bill_item_quantity,
-.bill_deliver_cost{
+.bill_deliver_cost,
+.bill_discount_cost{
 	font-size: 1.4rem;
 	color: rgba(29,29,29,.7);
 }
@@ -1147,6 +1169,9 @@ input[type=number]:not(.browser-default){
 	.checkout_r_section{
 		flex: 0;
 		margin: 0 0 5rem 0;
+	}
+	.checkout_discount_container{
+		margin-bottom: 2rem;
 	}
 	/*order*/
 	.order_title{
