@@ -70,6 +70,7 @@
       },
       dataType: "json",
       success: function(response){
+      	fbq('track', 'AddToCart');
 	      $("#nav_count").html(response.total_count);
         M.toast({html: response.message, classes:'toast', displayLength:2500})
       },  

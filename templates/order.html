@@ -21,6 +21,11 @@
 		      <td class="td_title td_price">￦{{ order.total_price }}</td>
 		    </tr>
 		  </tbody>
+  	  {% if forloop.first %}
+		 	 <script>
+		 	 	fbq('track', 'Purchase', {value: '{{ order.total_price }}', currency: 'KRW'});
+		  </script>
+  		{% endif %}
 			{% endfor %}
 			</table>
 			<div class="order_info_container">
