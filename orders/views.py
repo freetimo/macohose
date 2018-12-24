@@ -75,7 +75,7 @@ def cart(request):
 	else:
 		status = False
 		total_cost = cart.total + 2500
-		message = "EXTRA 상품만 구매하실 수 없습니다."
+		message = "EXTRA 상품은 COFFEE 상품과 함께 구매하실 수 있습니다."
 		ctx = {'total_cost': total_cost, 'cart': cart, 'message': message, 'status': status,}
 		return render(request, 'cart.html', ctx)
 
@@ -165,7 +165,7 @@ def checkout(request):
 				return render(request, 'checkout.html', ctx)
 	else:
 		total_cost = cart.total + 2500
-		message = "EXTRA 상품만 구매하실 수 없습니다."
+		message = "EXTRA 상품은 COFFEE 상품과 함께 구매하실 수 있습니다."
 		status = False
 		form = PostForm()
 		ctx = {'form': form, 'cart': cart, 'total_cost': total_cost, 'message': message, 'status': status,}
