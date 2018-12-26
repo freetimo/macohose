@@ -69,7 +69,7 @@ def cart(request):
 			return render(request, 'cart.html', ctx)
 		else:
 			total_cost = cart.total + 2500
-			message = "커피 세 상자 이상 구매시 배송비 무료입니다."
+			message = "커피 세 세트 이상 구매시 배송비 무료입니다."
 			ctx = {'total_cost': total_cost, 'cart': cart, 'message': message, 'status': status,}
 			return render(request, 'cart.html', ctx)
 	else:
