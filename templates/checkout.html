@@ -87,7 +87,7 @@
 				{% for item in cart.items %}
 				<div class="checkout_bill">
 					<div class="checkout_img_container">
-	     		 	<img src="{{ item.product.thumbnail.url }}" class="checkout_img" alt="">
+	     		 	<img src="{{ item.product.thumbnail.url }}" class="checkout_img" alt="{{ item.product.title }}">
 					</div>
 	      	<div class="checkout_bill_text">
 	      		<div>

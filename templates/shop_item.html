@@ -9,7 +9,7 @@
 <article>
 	<section class="s_item_section">
 		<div class="s_item_l_section">
-			<img src="{{ product.thumbnail.url }}" class="s_item_img" alt="">
+			<img src="{{ product.thumbnail.url }}" class="s_item_img" alt="{{ product.title }}">
 		</div>
 		<div class="s_item_r_section">
 			<div>
@@ -29,17 +29,17 @@
 		<div class="s_item_more">
 			{% if product.content1 %}
 			<div class="s_item_m_container">
-				<img src="{{ product.content1.url }}" alt="" class="s_item_m_img">
+				<img src="{{ product.content1.url }}" alt="{{ product.title }}" class="s_item_m_img">
 			</div>
 			{% endif %}
 			{% if product.content2 %}
 			<div class="s_item_m_container">
-				<img src="{{ product.content2.url }}" alt="" class="s_item_m_img">
+				<img src="{{ product.content2.url }}" alt="{{ product.title }}" class="s_item_m_img">
 			</div>
 			{% endif %}
 			{% if product.content3 %}
 				<div class="s_item_m_container">
-					<img src="{{ product.content3.url }}" alt="" class="s_item_m_img">
+					<img src="{{ product.content3.url }}" alt="{{ product.title }}" class="s_item_m_img">
 				</div>
 			{% endif %}
 		</div>

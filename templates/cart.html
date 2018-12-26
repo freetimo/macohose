@@ -53,7 +53,7 @@
 			    <tr>
 			      <td class="td_title td_img_container">
 			      	<a href="{% url 'shopping-cart-remove'%}?id={{item.product.id}}" class="remove">×</a>
-			      	<img src="{{ item.product.thumbnail.url }}" class="td_img" alt="">
+			      	<img src="{{ item.product.thumbnail.url }}" class="td_img" alt="{{ item.product.title }}">
 			      	<div><a href="{% url 'shop_item' item.product.slug %}" class="td_title">{{ item.product.title }}</a></div>
 			    	</td>
 			      <td class="td_title td_quantity">{{ item.quantity }}</td>
