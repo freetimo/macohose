@@ -29,7 +29,16 @@ class Product(models.Model):
 	description = models.TextField(blank=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 
-
 	class Meta:
 		ordering = ['id']
 		
+
+class Review(models.Model):
+	title = models.CharField(max_length=250)
+	category = models.CharField(max_length=250, blank=True)
+	star = models.PositiveIntegerField()
+	description = models.TextField()
+	created_at = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-created_at']

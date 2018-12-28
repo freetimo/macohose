@@ -3,17 +3,42 @@ from .forms import PostForm
 from .models import Order
 from django.http import JsonResponse, HttpResponse
 from carton.cart import Cart
-from products.models import Product
+from products.models import Product, Review
+from products.forms import ReviewForm
 from django.utils import timezone
+from django.views.decorators.http import require_POST
 from datetime import timedelta
 
 def shop_item(request, slug):
 	product = get_object_or_404(Product, slug=slug)
+	reviews = Review.objects.filter(category=product.slug)
+	form = ReviewForm()
 	ctx = {
 		'product': product,
+		'reviews': reviews,
+		'form': form,
 		}
 	return render(request, 'shop_item.html', ctx)
 
+@require_POST
+def review(request):
+	title = request.POST.get('title')
+	category = request.POST.get('product_slug')
+	star = request.POST.get('star')
+	description = request.POST.get('description')
+	if request.method == 'POST':
+		form = ReviewForm(request.POST)
+		form.title = title
+		form.star = star
+		form.description = description
+		if form.is_valid():
+			review = form.save(commit=False)
+			review.category = category
+			review.save()
+			return render(request, 'review_new_ajax.html', {'review': review, })
+	return redirect('shop_item', slug=category)
+
+@require_POST
 def add(request):
 	cart = Cart(request.session)
 	pk = request.POST.get('pk')
@@ -46,6 +71,7 @@ def add(request):
 						ctx = {'message': message, 'total_count': total_count,}
 						return JsonResponse(ctx)
 
+@require_POST
 def remove(request):
 	cart = Cart(request.session)
 	product = Product.objects.get(id=request.GET.get('id'))

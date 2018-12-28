@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block title %} | {{ product.title }}{% endblock %}
 {% block og_title %} | {{ product.title }}{% endblock %}
 {% block og_img %}{{ product.thumbnail.url }}{% endblock %}
@@ -44,12 +45,190 @@
 			{% endif %}
 		</div>
 	</section>
+	{% if product.category == "COFFEE" %}
+	<section class="comment_section">
+		<div class="review_title_container">
+			<span class="review_main_title">REVIEW</span>
+			<span class="review_open" onclick="show();">REVIEW 작성</span>
+		</div>
+		<div class="comment_form_container" id="comment_form_container" style="display: none">
+			<form method="post" autocomplete="off" class="comment_form" novalidate>
+			{% csrf_token %}
+			<div class="title_star_container">
+				<div class="input-field comment_title_container">
+					{% render_field form.title id='title' %}
+	        <label for="name">제목</label>
+		      {% for error in form.title.errors %}
+		      	<span class="helper-text red-text">제목을 작성해주시기 바랍니다.</span>
+		      {% endfor %}
+		    </div>
+		    <div class="star_container">
+	        <i class="material-icons star_icon" id="star1">star_border</i>
+	        <i class="material-icons star_icon" id="star2">star_border</i>
+	        <i class="material-icons star_icon" id="star3">star_border</i>
+	        <i class="material-icons star_icon" id="star4">star_border</i>
+	        <i class="material-icons star_icon" id="star5">star_border</i>
+		    </div>
+			</div>
+			<div class="input-field">
+        <textarea id="description" class="materialize-textarea"></textarea>
+        <label for="description" class="description_label">후기</label>
+	      {% for error in form.description.errors %}
+	      	<span class="helper-text red-text">후기를 작성해주시기 바랍니다.</span>
+	      {% endfor %}
+	    </div>
+	    <input type="hidden" id="product_slug" name="{{product.slug}}">
+			<button class="waves-effect waves-light btn review_btn" id="review_btn" name="">등록하기</button>
+		  </form>
+		</div>
+		<div>
+			<div id="review_ajax_container"></div>
+			{% for review in reviews %}
+			<div class="review_container">
+				<div class="review_title_star_container">
+					<div class="review_title">{{ review.title }}</div>
+					<div>
+						{% if review.star == 5%}
+						<div class="star_list">
+			        <i class="material-icons star_icon">star</i>
+			        <i class="material-icons star_icon">star</i>
+			        <i class="material-icons star_icon">star</i>
+			        <i class="material-icons star_icon">star</i>
+			        <i class="material-icons star_icon">star</i>
+						</div>
+						{% endif %}
+						{% if review.star == 4%}
+						<div class="star_list">
+			        <i class="material-icons star_icon">star</i>
+			        <i class="material-icons star_icon">star</i>
+			        <i class="material-icons star_icon">star</i>
+			        <i class="material-icons star_icon">star</i>
+						</div>
+						{% endif %}
+						{% if review.star == 3%}
+						<div class="star_list">
+			        <i class="material-icons star_icon">star</i>
+			        <i class="material-icons star_icon">star</i>
+			        <i class="material-icons star_icon">star</i>
+			      </div>
+						{% endif %}
+						{% if review.star == 2%}
+						<div class="star_list">
+			        <i class="material-icons star_icon">star</i>
+			        <i class="material-icons star_icon">star</i>
+			      </div>
+						{% endif %}
+						{% if review.star == 1%}
+						<div class="star_list">
+			        <i class="material-icons star_icon">star</i>
+			      </div>
+						{% endif %}
+					</div>
+				</div>
+				<div class="review_description">{{ review.description }}</div>
+			</div>
+			{% endfor %}
+		</div>
+	</section>
+	{% endif %}
 </article>
 {% include 'footer.html' %}
 {% endblock %}
 {% block javascript %}
 <script>
+  M.textareaAutoResize($('#description'));
 	$('#shop').addClass('b_nav')
+</script>
+<script>
+	$(document).on('click', '#review_btn', function(e){
+		e.preventDefault();
+    var star = $(this).attr('name') 
+    var product_slug = $("#product_slug").attr('name') 
+    var title = $("#title").val();
+    var description = $("#description").val();
+    title = $.trim(title);
+    description = $.trim(description);
+    if ( title == "") {
+    	return M.toast({html: '제목을 작성해주세요.', classes:'toast', displayLength:2500})
+    }
+    if ( description == "") {
+    	return M.toast({html: '후기를 작성해주세요.', classes:'toast', displayLength:2500})
+    }
+    if ( star == "") {
+    	return M.toast({html: '별을 선택해주세요.', classes:'toast', displayLength:2500})
+    }
+    $.ajax({
+      type: "POST",
+      url: "{% url 'review' %}",
+      data: {
+        'star': star, 
+        'product_slug': product_slug,
+        'title': title,
+        'description': description,
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      dataType: "html",
+      success: function(data, textStatus, jqXHR){
+        $("#title").val("");
+        $("#description").val("");
+		  	document.getElementById("star1").innerHTML = "star_border";
+		  	document.getElementById("star2").innerHTML = "star_border";
+		  	document.getElementById("star3").innerHTML = "star_border";
+		  	document.getElementById("star4").innerHTML = "star_border";
+		  	document.getElementById("star5").innerHTML = "star_border";
+        $("#review_ajax_container").prepend(data);
+        M.toast({html: "후기가 추가되었습니다.", classes:'toast', displayLength:2500})
+      },
+      error: function(request, status, error){
+        M.toast({html: '에러 발생', classes:'toast', displayLength:2500})
+      },
+    });
+  });
+</script>
+<script>
+	function show() {
+		document.getElementById("comment_form_container").style.display ="block";
+	}
+  $('#star1').click(function(){
+  	document.getElementById("review_btn").name = "1";
+  	document.getElementById("star1").innerHTML = "star";
+  	document.getElementById("star2").innerHTML = "star_border";
+  	document.getElementById("star3").innerHTML = "star_border";
+  	document.getElementById("star4").innerHTML = "star_border";
+  	document.getElementById("star5").innerHTML = "star_border";
+  })  
+  $('#star2').click(function(){
+  	document.getElementById("review_btn").name = "2";
+  	document.getElementById("star1").innerHTML = "star";
+  	document.getElementById("star2").innerHTML = "star";
+  	document.getElementById("star3").innerHTML = "star_border";
+  	document.getElementById("star4").innerHTML = "star_border";
+  	document.getElementById("star5").innerHTML = "star_border";
+  })  
+  $('#star3').click(function(){
+  	document.getElementById("review_btn").name = "3";
+  	document.getElementById("star1").innerHTML = "star";
+  	document.getElementById("star2").innerHTML = "star";
+  	document.getElementById("star3").innerHTML = "star";
+  	document.getElementById("star4").innerHTML = "star_border";
+  	document.getElementById("star5").innerHTML = "star_border";
+  })  
+  $('#star4').click(function(){
+  	document.getElementById("review_btn").name = "4";
+  	document.getElementById("star1").innerHTML = "star";
+  	document.getElementById("star2").innerHTML = "star";
+  	document.getElementById("star3").innerHTML = "star";
+  	document.getElementById("star4").innerHTML = "star";
+  	document.getElementById("star5").innerHTML = "star_border";
+  })  
+  $('#star5').click(function(){
+  	document.getElementById("review_btn").name = "5";
+  	document.getElementById("star1").innerHTML = "star";
+  	document.getElementById("star2").innerHTML = "star";
+  	document.getElementById("star3").innerHTML = "star";
+  	document.getElementById("star4").innerHTML = "star";
+  	document.getElementById("star5").innerHTML = "star";
+  })  
 </script>
 <script>
 	function onlyNumber(){
