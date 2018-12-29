@@ -531,7 +531,7 @@ nav a{
 	flex: 1;
 	text-align: right;
 }
-.star_icon{
+.star_container>.star_icon{
 	cursor: pointer;
 }
 .review_container{
