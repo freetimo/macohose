@@ -450,6 +450,9 @@ nav a{
 	color: rgb(100, 100, 100);
 	font-size: 1.35rem;
 }
+.shop_item_info{
+	font-size: 1.45rem;
+}
 /*shop_item*/
 .s_item_section,
 .comment_section{	
@@ -474,7 +477,7 @@ nav a{
 	font-weight: bold;
 }
 .s_item_r_price{
-	font-size: 1.6rem;
+	font-size: 1.4rem;
 	margin: 2rem 0;
 	color: rgb(100, 100, 100);
 }

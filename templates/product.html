@@ -2,7 +2,7 @@
 	<a href="{% url 'shop_item' product.slug %}">
 		<div class="shop_item_thumb"><img src="{{ product.thumbnail.url }}" alt="{{ product.title }}" class="shop_item_img"></div>
 		<div class="shop_item_title">{{ product.title }}</div>
-		<div class="shop_item_price">￦{{ product.price }}</div>
 		<div class="shop_item_info">{{ product.info }}</div>
+		<div class="shop_item_price">￦{{ product.price }}</div>
 	</a>
 </div>
