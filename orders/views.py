@@ -71,7 +71,6 @@ def add(request):
 						ctx = {'message': message, 'total_count': total_count,}
 						return JsonResponse(ctx)
 
-@require_POST
 def remove(request):
 	cart = Cart(request.session)
 	product = Product.objects.get(id=request.GET.get('id'))
