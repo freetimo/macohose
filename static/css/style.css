@@ -546,6 +546,9 @@ nav a{
 	font-size: 1.7rem;
 	color: black;
 }
+.star_list{
+	width: 13.4rem;
+}
 .review_description{
 	font-size: 1.5rem;
 	margin: 1rem 0;
