@@ -135,10 +135,12 @@
 {% include 'footer.html' %}
 {% endblock %}
 {% block javascript %}
+{% if product.category == "COFFEE" %}
 <script>
   M.textareaAutoResize($('#description'));
 	$('#shop').addClass('b_nav')
 </script>
+{% endif %}
 <script>
 	$(document).on('click', '#review_btn', function(e){
 		e.preventDefault();

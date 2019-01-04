@@ -108,93 +108,83 @@ def checkout(request):
 	cart = Cart(request.session)
 	total_count = cart.count
 	order_list = []
-	coffee_list = []
 	coffee_count = 0
 	for item in cart.items:
 		order_list.extend([item.product.title, item.quantity])
 		if item.product.category == 'COFFEE':
 			coffee_count += item.quantity
-			coffee_list.append(item.product)
-	if len(coffee_list) > 0:
-		status = True
-		if coffee_count < 3:
-			total_cost = cart.total + 2500
-			if request.method == 'POST':
-				right_discount_code = request.POST.get("right_discount_code")
-				if right_discount_code == '0752':
-					discount = 1000
-					total_cost = cart.total + 2500 - discount
-					form = PostForm(request.POST)
-					if form.is_valid():
-						checkout = form.save(commit=False)
-						checkout.total_product = order_list
-						checkout.total_price = total_cost
-						checkout.save()
-						cart.clear()
-						return redirect('email', email=checkout.email)
-					else:
-						stop_btn = True
-						ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status, 'discount': discount, 'right_discount_code': right_discount_code, 'stop_btn': stop_btn,}
-						return render(request, 'checkout.html', ctx)
-				else:
-					total_cost = cart.total + 2500
-					form = PostForm(request.POST)
-					if form.is_valid():
-						checkout = form.save(commit=False)
-						checkout.total_product = order_list
-						checkout.total_price = total_cost
-						checkout.save()
-						cart.clear()
-						return redirect('email', email=checkout.email)
-					else:
-						ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status, }
-						return render(request, 'checkout.html', ctx)
-			else:
-				form = PostForm()
-				ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status,}
-				return render(request, 'checkout.html', ctx)
-		else:
-			total_cost = cart.total
-			if request.method == 'POST':
-				right_discount_code = request.POST.get("right_discount_code")
-				if right_discount_code == '0752':
-					discount = 1000
-					total_cost = cart.total - discount
-					form = PostForm(request.POST)
-					if form.is_valid():
-						checkout = form.save(commit=False)
-						checkout.total_product = order_list
-						checkout.total_price = total_cost
-						checkout.save()
-						cart.clear()
-						return redirect('email', email=checkout.email)  
-					else:
-						stop_btn = True
-						ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status, 'discount': discount, 'right_discount_code': right_discount_code, 'stop_btn': stop_btn,}
-						return render(request, 'checkout.html', ctx)
-				else:
-					form = PostForm(request.POST)
-					if form.is_valid():
-						checkout = form.save(commit=False)
-						checkout.total_product = order_list
-						checkout.total_price = total_cost
-						checkout.save()
-						cart.clear()
-						return redirect('email', email=checkout.email)  
-					else:
-						ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'status': status,}
-						return render(request, 'checkout.html', ctx)
-			else:
-				form = PostForm()
-				ctx = {'form': form, 'cart': cart, 'total_cost': total_cost, 'status': status,}
-				return render(request, 'checkout.html', ctx)
-	else:
+	if coffee_count < 3:
 		total_cost = cart.total + 2500
-		message = "EXTRA 상품은 COFFEE 상품과 함께 구매하실 수 있습니다."
-		status = False
-		form = PostForm()
-		ctx = {'form': form, 'cart': cart, 'total_cost': total_cost, 'message': message, 'status': status,}
-		return render(request, 'checkout.html', ctx)
+		if request.method == 'POST':
+			right_discount_code = request.POST.get("right_discount_code")
+			if right_discount_code == '0752':
+				discount = 1000
+				total_cost = cart.total + 2500 - discount
+				form = PostForm(request.POST)
+				if form.is_valid():
+					checkout = form.save(commit=False)
+					checkout.total_product = order_list
+					checkout.total_price = total_cost
+					checkout.save()
+					cart.clear()
+					return redirect('email', email=checkout.email)
+				else:
+					stop_btn = True
+					ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'discount': discount, 'right_discount_code': right_discount_code, 'stop_btn': stop_btn,}
+					return render(request, 'checkout.html', ctx)
+			else:
+				total_cost = cart.total + 2500
+				form = PostForm(request.POST)
+				if form.is_valid():
+					checkout = form.save(commit=False)
+					checkout.total_product = order_list
+					checkout.total_price = total_cost
+					checkout.save()
+					cart.clear()
+					return redirect('email', email=checkout.email)
+				else:
+					ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, }
+					return render(request, 'checkout.html', ctx)
+		else:
+			form = PostForm()
+			ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost,}
+			return render(request, 'checkout.html', ctx)
+	else:
+		total_cost = cart.total
+		if request.method == 'POST':
+			right_discount_code = request.POST.get("right_discount_code")
+			if right_discount_code == '0752':
+				discount = 1000
+				total_cost = cart.total - discount
+				form = PostForm(request.POST)
+				if form.is_valid():
+					checkout = form.save(commit=False)
+					checkout.total_product = order_list
+					checkout.total_price = total_cost
+					checkout.save()
+					cart.clear()
+					return redirect('email', email=checkout.email)  
+				else:
+					stop_btn = True
+					ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost, 'discount': discount, 'right_discount_code': right_discount_code, 'stop_btn': stop_btn,}
+					return render(request, 'checkout.html', ctx)
+			else:
+				form = PostForm(request.POST)
+				if form.is_valid():
+					checkout = form.save(commit=False)
+					checkout.total_product = order_list
+					checkout.total_price = total_cost
+					checkout.save()
+					cart.clear()
+					return redirect('email', email=checkout.email)  
+				else:
+					ctx = {'form': form, 'cart': cart, 'coffee_count': coffee_count, 'total_cost': total_cost,}
+					return render(request, 'checkout.html', ctx)
+		else:
+			form = PostForm()
+			ctx = {'form': form, 'cart': cart, 'total_cost': total_cost,}
+			return render(request, 'checkout.html', ctx)
+
 
 def discount(request):
 	total_cost = request.POST.get('total_cost')

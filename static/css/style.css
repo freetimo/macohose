@@ -850,6 +850,8 @@ input[type=number]:not(.browser-default){
   font-size: 1.4rem;
   background-color: black;
   color: white;
+ 	width: 9rem;
+ 	margin-left: 1rem;
 }
 .checkout_bill{
 	display: flex;

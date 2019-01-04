@@ -64,11 +64,7 @@
 		    </div>
 		    <input type="hidden" name="right_discount_code" id="right_discount_code" value="{{right_discount_code}}">
 				<div class="checkout_notice">NOTICE) 무통장 입금으로만 진행할 수 있습니다. 양해부탁드립니다. 상기 이름은 예금주명과 동일해야합니다.</div>
-				{% if status %}
-				<button class="waves-effect waves-light btn submit_btn" type="submit" name="action">주문하기</button>
-				{% else %}
-				<a onclick="M.toast({html:'{{message}}', classes:'toast_btn', displayLength:2500} )" class="waves-effect waves-light btn submit_btn">주문하기</a>
-				{% endif %}
+				<button class="waves-effect waves-light btn submit_btn" type="submit">주문하기</button>
 			</form>
 		</div>
 		<div class="checkout_r_section">
@@ -79,7 +75,7 @@
 						<input type="text" autocomplete="off" id="discount_code" value="{{right_discount_code}}">
 		        <label for="discount_code">할인코드</label>
 					</div>
-					<button class="waves-effect waves-light btn discount_btn" id="discount_btn" type="submit" name="{{total_cost}}">적용하기</button>
+					<a class="waves-effect waves-light btn discount_btn" id="discount_btn" name="{{total_cost}}">적용하기</a>
 				</div>
 			</div>
 			<div class="checkout_bill_container">
@@ -104,11 +100,7 @@
 				<div class="">
 					<div class="checkout_bill_cost">
 						<div class="bill_deliver_cost">배송비</div>
-						{% if status %}
 						<div class="bill_deliver_cost">￦{% if coffee_count < 3%}2500{% else %}0{% endif %}</div>
-						{% else %}
-						<div class="bill_deliver_cost">￦2500</div>
-						{% endif %}
 					</div>
 					<div class="checkout_bill_cost">
 						<div class="bill_discount_cost">할인액</div>
@@ -192,7 +184,9 @@
 </script>
 {% if not stop_btn %}
 <script id="discount_script">
-  $('#discount_btn').click(function(){
+  $('#discount_btn').click(function(e){
+  	e.stopPropagation();
+  	e.preventDefault()
     var total_cost = $(this).attr('name') 
     var discount_code = $("#discount_code").val();
     $.ajax({
@@ -210,8 +204,8 @@
 	      $("#bill_discount_cost").html(response.discount);
 	      $("#bill_total_cost").html(response.discount_cost);
       },  
-      error: function(request, status, error){
-        M.toast({html: response.message, classes:'toast', displayLength:2500})
+      error: function(response){
+        M.toast({html: '에러 발생', classes:'toast', displayLength:2500});
       },
     });
   })  
