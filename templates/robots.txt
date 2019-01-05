@@ -4,3 +4,4 @@ Allow: /$
 Allow: /about/
 Allow: /shop/
 Allow: /contact/
+Sitemap: /sitemap

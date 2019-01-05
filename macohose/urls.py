@@ -21,6 +21,7 @@ urlpatterns = [
   path('discount/', views.discount, name="discount"),
   path('review/', views.review, name="review"),
   path('robots.txt/', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"), name="robots"),
+  path('sitemap/', TemplateView.as_view(template_name="sitemap.xml", content_type='text/xml'), name="sitemap"),
   path('<str:email>/', views.email, name="email"),
 ]
 
