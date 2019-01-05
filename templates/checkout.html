@@ -99,8 +99,12 @@
 				{% endfor %}
 				<div class="">
 					<div class="checkout_bill_cost">
+						<div class="bill_deliver_cost">상품금액</div>
+						<div class="bill_deliver_cost">￦{{ cart.total }}</div>
+					</div>
+					<div class="checkout_bill_cost">
 						<div class="bill_deliver_cost">배송비</div>
-						<div class="bill_deliver_cost">￦{% if coffee_count < 3%}2500{% else %}0{% endif %}</div>
+						<div class="bill_deliver_cost">￦{% if total_cost < 30000%}2500{% else %}0{% endif %}</div>
 					</div>
 					<div class="checkout_bill_cost">
 						<div class="bill_discount_cost">할인액</div>

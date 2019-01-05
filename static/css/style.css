@@ -779,13 +779,12 @@ input[type=number]:not(.browser-default){
 	color: rgba(29,29,29,.7);
   font-size: 1.4rem;
   text-align: center;
-  margin: 0 auto 1rem;
 }
 .total_cost{
 	color: rgba(29,29,29,.8);
   font-size: 1.6rem;
   text-align: center;
-  margin: 0 auto;
+  margin: 1rem auto 0 auto;
 }
 .total_cost_message{
 	color: rgba(29,29,29,.8);
