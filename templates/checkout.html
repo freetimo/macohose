@@ -186,6 +186,15 @@
     element_wrap.style.display = 'block';
   }
 </script>
+<!-- Event snippet for Checkout url 접속 conversion page -->
+<script>
+gtag('event', 'conversion', {
+    'send_to': 'AW-772396363/9WttCIv025IBEMuqp_AC',
+    'value': {{total_cost}},
+    'currency': 'KRW',
+    'transaction_id': ''
+});
+</script>
 {% if not stop_btn %}
 <script id="discount_script">
   $('#discount_btn').click(function(e){
