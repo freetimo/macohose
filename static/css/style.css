@@ -416,6 +416,26 @@ nav a{
 	margin-bottom: 1.5rem;
 	overflow: hidden;
 }
+.shop_item_new{
+	display: inline-block;
+  position: relative;
+}
+.shop_item_new:after {
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  height: auto;
+  background: black;
+  content: "NEW";
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 10px;
+  left: -30px;
+  top: 3px;
+  transform: rotate(-30deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
 .shop_item_thumb img {
   -webkit-transform:scale(1);
   -moz-transform:scale(1);
@@ -1121,10 +1141,17 @@ input[type=number]:not(.browser-default){
 	.shop_item_section{
     margin: 2rem auto;
 	}
+	.shop_main_title{
+		width: 85%;
+	}
 	.shop_item_grid{
 	  grid-template-columns: repeat(auto-fill, minmax(20rem, 1.5fr));
 	  grid-gap: 1.5rem;
 	}
+	.shop_item_title{
+		font-size: 1.6rem;
+	}
+
 	/*shop_item*/
 	.s_item_section{
 		width: 100%;
@@ -1323,5 +1350,11 @@ input[type=number]:not(.browser-default){
 	}
 	.error_page_sub_description{
 	  font-size: 1.6rem;
+	}
+}
+@media only screen and (max-width: 600px){
+	.shop_item_grid{
+	  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+	  grid-gap: 1rem;
 	}
 }
