@@ -7,7 +7,7 @@
 {% block og_description %} | {{ product.description }}{% endblock %}
 {% block fqb %}fbq('track', 'ViewContent');{% endblock %}
 {% block content %}
-<article>
+<article class="shop_item_article">
 	<section class="s_item_section">
 		<div class="s_item_l_section">
 			<img src="{{ product.thumbnail.url }}" class="s_item_img" alt="{{ product.title }}">

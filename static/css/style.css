@@ -37,6 +37,13 @@ h1{
 .toast{
 	font-size: 1.5rem;
 }
+.shop_article,
+.shop_item_article,
+.contact_article,
+.cart_article,
+.order_article{
+	margin-bottom: 13rem;
+}
 /*nav*/
 nav{
 	all: unset;
@@ -250,6 +257,9 @@ nav a{
 	text-align: center;
 	width: 50rem;
 }
+.a_v_m_text{
+	text-align: center;
+}
 .a_v_title,
 .a_p_title,
 .a_a_title{
@@ -327,7 +337,7 @@ nav a{
 }
 .shop_btn{
 	text-align: center;
-	margin: 7rem 0 0 0;
+	margin: 7rem 0 7rem 0;
 }
 .shop_btn>.btn{
 	height: 4.5rem;
@@ -362,11 +372,20 @@ nav a{
 	width: 100%; 
 	border-bottom: 1px solid rgba(0, 0, 0 , 0.2); 
 	line-height: 0.1em;
-	margin: 4rem 0 2rem; 
+	margin: 4rem 0 4rem; 
 } 
 .f_logo>span { 
 	background:#fff; 
 	padding:0 10px; 
+}
+.f_info_container{
+	display: flex;
+	justify-content: center;
+	font-size: 1.1rem;
+	color: rgb(100, 100, 100);
+}
+.f_info{
+	margin: 0 0.5rem;
 }
 /*shop*/
 .shop_title{
@@ -959,6 +978,13 @@ input[type=number]:not(.browser-default){
 	.footer{
     margin: 0 auto 2rem;
 	}
+	.shop_article,
+	.shop_item_article,
+	.contact_article,
+	.cart_article,
+	.order_article{
+		margin-bottom: 8rem;
+	}
 	.nav{
 		width: 90%;
 	}
@@ -1095,11 +1121,12 @@ input[type=number]:not(.browser-default){
 	.a_v_title{
 		font-size: 2rem;
     width: 9rem;
-    margin: 2rem auto 1.5rem auto;
+    margin: 4rem auto 1.5rem auto;
 	}
 	.a_vision_description,
 	.a_v_description{
 		margin-bottom: 2rem;
+		font-size: 1.6rem;
 	}
 	.about_product{
 		width: 100%;
@@ -1117,13 +1144,14 @@ input[type=number]:not(.browser-default){
 	}
 	.a_p_title,
 	.a_a_title{
-		margin: 2rem auto;
+		margin: 4rem auto;
 		font-size: 2rem;
     width: 12rem;
 	}
 	.a_p_description,
 	.a_a_description{
 		padding: 0;
+		font-size: 1.6rem;
 	}
 	.about_attitude{
 		width: 90%;
@@ -1151,7 +1179,6 @@ input[type=number]:not(.browser-default){
 	.shop_item_title{
 		font-size: 1.6rem;
 	}
-
 	/*shop_item*/
 	.s_item_section{
 		width: 100%;
@@ -1333,6 +1360,7 @@ input[type=number]:not(.browser-default){
 	.order_info_description{
 	 -webkit-text-fill-color: rgba(0, 0, 0, 1); 
 	 -webkit-opacity: 1; 
+	 font-size: 1.5rem;
 	}
 	.order_back_home{
 		text-align: center;
@@ -1350,6 +1378,15 @@ input[type=number]:not(.browser-default){
 	}
 	.error_page_sub_description{
 	  font-size: 1.6rem;
+	}
+	.f_logo{
+		margin: 3rem auto 3rem;
+	}
+	.f_info_container{
+		flex-direction: column;
+	}
+	.f_info{
+		margin: 0;
 	}
 }
 @media only screen and (max-width: 600px){
