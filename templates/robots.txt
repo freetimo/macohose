@@ -5,4 +5,4 @@ Allow: /about/
 Allow: /shop/
 Allow: /contact/
 Allow: /sitemap
-Sitemap: /sitemap
+Sitemap: https://www.macohose.com/sitemap/
