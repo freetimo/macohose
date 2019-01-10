@@ -581,8 +581,15 @@ nav a{
 .star_container>.star_icon{
 	cursor: pointer;
 }
+.star_list>.star_icon{
+	font-size: 2.2rem;
+}
+.review_created_at{
+	font-size: 1.3rem;
+	color: rgb(100, 100, 100);
+}
 .review_container{
-	margin: 2rem 0;
+	margin: 0.7rem 0;
   border-bottom: 1px solid rgb(200, 200, 200);
 	max-width: 70rem;
 }
@@ -591,7 +598,7 @@ nav a{
 	color: black;
 }
 .star_list{
-	width: 13.4rem;
+	width: 12.3rem;
 }
 .review_description{
 	font-size: 1.5rem;
@@ -1252,6 +1259,9 @@ input[type=number]:not(.browser-default){
 	.star_list>.star_icon{
 		font-size: 1.7rem;
 		float: right;
+	}
+	.review_created_at{
+		font-size: 1.15rem;
 	}
 	/*contact*/
 	.contact{

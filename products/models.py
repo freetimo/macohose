@@ -1,6 +1,7 @@
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+from django.utils.timezone import now
 
 
 class Product(models.Model):
@@ -38,7 +39,7 @@ class Review(models.Model):
 	category = models.CharField(max_length=250, blank=True)
 	star = models.PositiveIntegerField()
 	description = models.TextField()
-	created_at = models.DateTimeField(auto_now_add=True)
+	created_at = models.DateTimeField(default=now)
 
 	class Meta:
 		ordering = ['-created_at']

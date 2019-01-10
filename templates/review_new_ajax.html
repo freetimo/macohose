@@ -1,6 +1,7 @@
+{% load humanize %}
 <div class="review_container">
 	<div class="review_title_star_container">
-		<div class="review_title">{{ review.title }}</div>
+		<div class="review_title">{{ review.title }} <span class="review_created_at hide-upper">{{ review.created_at|naturaltime }}</span></div>
 		<div>
 			{% if review.star == 5%}
 			<div class="star_list">
@@ -37,6 +38,7 @@
         <i class="material-icons star_icon">star</i>
       </div>
 			{% endif %}
+			<span class="review_created_at hide-under">{{ review.created_at|naturaltime }}</span>
 		</div>
 	</div>
 	<div class="review_description">{{ review.description }}</div>
