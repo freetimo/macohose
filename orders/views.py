@@ -44,7 +44,7 @@ def add(request):
 	pk = request.POST.get('pk')
 	quantity = request.POST.get('quantity')
 	if quantity == '':
-		message = '수량을 선택해주세요.'
+		message = ' 수량을 선택해주세요.'
 		ctx = {'message': message, }
 		return JsonResponse(ctx)
 	else:
@@ -52,7 +52,13 @@ def add(request):
 		if not product.category == 'EXTRA':
 			cart.add(product, price=product.price, quantity=quantity)
 			total_count = cart.count
-			message = '장바구니에 상품을 담았습니다.'
+			message = ' 상품을 장바구니에 담았습니다.'
+			ctx = {'message': message, 'total_count': total_count,}
+			return JsonResponse(ctx)
+		elif product.title == '13oz컵 • 홀더 • 뚜겅 세트':
+			cart.add(product, price=product.price, quantity=quantity)
+			total_count = cart.count
+			message = ' 상품을 장바구니에 담았습니다.'
 			ctx = {'message': message, 'total_count': total_count,}
 			return JsonResponse(ctx)
 		else:
@@ -62,12 +68,12 @@ def add(request):
 					if cart_item.quantity > 5:
 						cart.set_quantity(product, quantity=5)
 						total_count = cart.count
-						message = 'EXTRA 상품은 최대 5개까지 구매하실 수 있습니다.'
+						message = ' 상품은 최대 5개까지 구매하실 수 있습니다.'
 						ctx = {'message': message, 'total_count': total_count,}
 						return JsonResponse(ctx)
 					else:
 						total_count = cart.count
-						message = '장바구니에 상품을 담았습니다.'
+						message = ' 상품을 장바구니에 담았습니다.'
 						ctx = {'message': message, 'total_count': total_count,}
 						return JsonResponse(ctx)
 
@@ -92,9 +98,9 @@ def cart(request):
 			message = "EXTRA 상품을 제외한 COFFEE 상품 다섯 개 이상부터 구매하실 수 있습니다."
 			ctx = {'total_cost': total_cost, 'cart': cart, 'message': message, 'status': status,}
 			return render(request, 'cart.html', ctx)
-		elif cart.total < 30000:
+		elif cart.total < 25000:
 			total_cost = cart.total + 2500
-			message = "상품 금액 ￦30000 이상시 배송비 무료입니다."
+			message = "상품 금액 ￦25000 이상시 배송비 무료입니다."
 			ctx = {'total_cost': total_cost, 'cart': cart, 'message': message, 'status': status,}
 			return render(request, 'cart.html', ctx)
 		else:
@@ -118,7 +124,7 @@ def checkout(request):
 		if item.product.category == 'COFFEE':
 			coffee_count += item.quantity
 	if coffee_count > 4:
-		if cart.total < 30000:
+		if cart.total < 25000:
 			total_cost = cart.total + 2500
 			if request.method == 'POST':
 				right_discount_code = request.POST.get("right_discount_code")

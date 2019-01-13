@@ -256,7 +256,7 @@
       success: function(response){
       	fbq('track', 'AddToCart');
 	      $("#nav_count").html(response.total_count);
-        M.toast({html: response.message, classes:'toast', displayLength:2500})
+        M.toast({html: '{{product.title}}' + response.message, classes:'toast', displayLength:2500})
       },  
       error: function(request, status, error){
         M.toast({html: '최소 수량을 선택해주세요.', classes:'toast', displayLength:2500})
