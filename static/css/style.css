@@ -1408,7 +1408,7 @@ input[type=number]:not(.browser-default){
 	  grid-gap: 1rem;
 	}
 }
-@media only screen and (max-height: 600px){
+@media only screen and (max-height: 500px){
 		.h-hide-under{
    	  display:none !important
 		}
